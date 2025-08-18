@@ -25,8 +25,14 @@ export async function GET(req: NextRequest) {
     if (!res[0]) return NextResponse.json({ error: "No remaining problems" }, { status: 404 });
 
     return NextResponse.json(res[0]);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    let message = "An unknown error occurred";
+
+    if (err instanceof Error) {
+      message = err.message;
+    }
+
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

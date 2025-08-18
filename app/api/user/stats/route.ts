@@ -23,8 +23,14 @@ export async function GET(req: NextRequest) {
     const solved = Number(solvedRes[0]?.solved || 0);
 
     return NextResponse.json({ total, solved });
-  } catch (err: any) {
+  }catch (err: unknown) {
     console.error(err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    let message = "An unknown error occurred";
+
+    if (err instanceof Error) {
+      message = err.message;
+    }
+
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

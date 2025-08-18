@@ -4,8 +4,15 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 
+type Problem = {
+  cses_id: number;
+  title: string;
+  link: string;
+  status: "done" | "pending" | "not_attempted";
+};
+
 export default function RandomProblemPage() {
-  const [problem, setProblem] = useState<any>(null);
+  const [problem, setProblem] = useState<Problem|null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
 
@@ -37,7 +44,8 @@ export default function RandomProblemPage() {
     fetchProblem();
   }, []);
 
-  const updateStatus = async (status: "done" | "pending" | "not_attempted") => {
+  const updateStatus = async (status: Problem["status"]) => {
+    if (!problem) return;
     setUpdating(true);
     await fetch("/api/progress/update", {
       method: "POST",
@@ -59,6 +67,7 @@ export default function RandomProblemPage() {
       </div>
     );
   }
+   if (!problem) return null;
 
   return (
     <>

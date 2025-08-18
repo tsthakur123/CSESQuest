@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
       userId: payload.id,
       email: payload.email,
     });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ loggedIn: false });
   }
 }

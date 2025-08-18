@@ -44,11 +44,11 @@ export default function Home() {
 
       // Table of all problems with user status
       const tableRes = await fetch("/api/problems");
-      const tableData = await tableRes.json();
+      const tableData:Problem[] = await tableRes.json();
       console.log("table data",tableData);
       
       setAllProblems(
-        tableData.map((p: any) => ({
+        tableData.map((p) => ({
           cses_id: p.cses_id,
           title: p.title,
           link: p.link,
