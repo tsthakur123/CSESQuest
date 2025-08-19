@@ -42,58 +42,83 @@ export default function AuthForm({ mode }: AuthFormProps) {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 to-indigo-50">
-      <div className="w-full max-w-md p-8 bg-white bg-opacity-80 backdrop-blur-md rounded-2xl shadow-2xl">
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-6 capitalize text-center">
+    <div className="h-screen flex items-center justify-center bg-[#0d1117]">
+      <div className="w-full max-w-md card hover-lift">
+        {/* Terminal header */}
+        <div className="terminal-header mb-6">
+          <div className="terminal-dot red"></div>
+          <div className="terminal-dot yellow"></div>
+          <div className="terminal-dot green"></div>
+          <span className="text-[#8b949e] text-sm ml-2" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            {mode.toUpperCase()} Terminal
+          </span>
+        </div>
+
+        <h1 className="text-3xl font-bold text-[#f0f6fc] mb-6 capitalize text-center" style={{ fontFamily: 'Oxanium, sans-serif' }}>
           {mode}
         </h1>
 
         {error && (
-          <p className="text-red-500 bg-red-100 p-2 rounded mb-4 text-center font-medium">
-            {error}
-          </p>
+          <div className="text-[#f78166] bg-[#f78166]/10 border border-[#f78166]/20 p-3 mb-4 text-center font-medium rounded-lg" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            Error: {error}
+          </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="flex flex-col">
-            <label className="mb-2 font-semibold text-gray-700">Email</label>
+            <label className="mb-2 font-semibold text-[#8b949e]" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+              Email Address
+            </label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="px-4 py-2 rounded-xl border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+              className="input-primary w-full"
+              placeholder="Enter your email..."
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-2 font-semibold text-gray-700">Password</label>
+            <label className="mb-2 font-semibold text-[#8b949e]" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+              Password
+            </label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="px-4 py-2 text-black rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+              className="input-primary w-full"
+              placeholder="Enter your password..."
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-2 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold text-lg hover:scale-105 transition-transform"
+            className="w-full py-3 btn-primary text-lg font-bold hover:scale-105 transition-transform"
+            style={{ fontFamily: 'Oxanium, sans-serif' }}
           >
             {mode === "signup" ? "Sign Up" : "Login"}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-gray-600 text-sm">
-          {mode === "signup" ? "Already have an account?" : "Don't have an account?"}{" "}
-          <span
-            className="text-purple-600 font-semibold cursor-pointer hover:underline"
-            onClick={() => router.push(mode === "signup" ? "/login" : "/signup")}
-          >
-            {mode === "signup" ? "Login" : "Sign Up"}
-          </span>
-        </p>
+        <div className="mt-6 bg-[#0d1117] border border-[#30363d] rounded-lg p-3">
+          <p className="text-center text-[#8b949e] text-sm" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            {mode === "signup" ? "Already have an account?" : "Don't have an account?"}{" "}
+            <span
+              className="text-[#58a6ff] font-semibold cursor-pointer hover:text-[#4c9eff] transition-colors"
+              onClick={() => router.push(mode === "signup" ? "/login" : "/signup")}
+              style={{ fontFamily: 'Oxanium, sans-serif' }}
+            >
+              {mode === "signup" ? "Login" : "Sign Up"}
+            </span>
+          </p>
+        </div>
+
+        {/* Status footer */}
+        <div className="mt-4 text-[#6e7681] text-xs text-center" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+          Status: Ready • Authentication System Online
+        </div>
       </div>
     </div>
   );

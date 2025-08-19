@@ -58,12 +58,20 @@ export default function RandomProblemPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#FDFCFB] to-[#E2D1C3]">
-        <motion.div
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="h-16 w-16 rounded-full border-4 border-t-[#FE744D] border-gray-600"
-        />
+      <div className="flex justify-center items-center min-h-screen bg-[#0d1117]">
+        <div className="text-center">
+          <motion.div
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="h-16 w-16 border-4 border-t-[#58a6ff] border-[#30363d] rounded-full mb-4"
+          />
+          <div className="text-[#8b949e] text-2xl mb-2 loading-dots" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            Loading
+          </div>
+          <div className="text-[#6e7681] text-sm" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            Fetching Random Problem
+          </div>
+        </div>
       </div>
     );
   }
@@ -72,32 +80,44 @@ export default function RandomProblemPage() {
   return (
     <>
     <Navbar username={username || undefined} />
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#FDFCFB] to-[#E2D1C3] p-6">
+      <div className="flex justify-center items-center min-h-screen bg-[#0d1117] p-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative w-full max-w-2xl bg-white/70 backdrop-blur-lg rounded-3xl shadow-2xl p-10 text-center border border-[#E2D1C3]/50"
+          className="relative w-full max-w-2xl card hover-lift text-center"
         >
-          <h2 className="text-4xl font-bold text-[#3A506B] tracking-tight">
+          {/* Terminal header */}
+          <div className="terminal-header mb-6">
+            <div className="terminal-dot red"></div>
+            <div className="terminal-dot yellow"></div>
+            <div className="terminal-dot green"></div>
+            <span className="text-[#8b949e] text-sm ml-2" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+              Random Problem Terminal
+            </span>
+          </div>
+
+          <h2 className="text-4xl font-bold text-[#f0f6fc] tracking-tight mb-6" style={{ fontFamily: 'Oxanium, sans-serif' }}>
             {problem.title}
           </h2>
 
           <a
             href={problem.link}
             target="_blank"
-            className="block mt-4 text-[#5BC0BE] hover:text-[#FF6B6B] transition text-lg font-medium"
+            className="block mb-8 text-[#58a6ff] hover:text-[#4c9eff] transition-colors text-lg font-medium btn-primary inline-block"
+            style={{ fontFamily: 'Oxanium, sans-serif' }}
           >
             Solve on CSES →
           </a>
 
-          <div className="mt-10 flex gap-4 justify-center flex-wrap">
+          <div className="flex gap-4 justify-center flex-wrap">
             <motion.button
               onClick={() => updateStatus("done")}
               whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
               disabled={updating}
-              className="px-6 py-3 rounded-2xl font-medium text-white bg-[#FF6B6B] shadow-md hover:shadow-lg hover:bg-[#e85a5a] transition disabled:opacity-50"
+              className="btn-primary disabled:opacity-50"
+              style={{ fontFamily: 'Oxanium, sans-serif' }}
             >
               ✅ Done
             </motion.button>
@@ -107,7 +127,8 @@ export default function RandomProblemPage() {
               whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
               disabled={updating}
-              className="px-6 py-3 rounded-2xl font-medium text-white bg-[#5BC0BE] shadow-md hover:shadow-lg hover:bg-[#4daaaa] transition disabled:opacity-50"
+              className="btn-secondary text-[#f78166] border-[#f78166] hover:bg-[#f78166] hover:text-[#f0f6fc] disabled:opacity-50"
+              style={{ fontFamily: 'Oxanium, sans-serif' }}
             >
               ⏳ Pending
             </motion.button>
@@ -117,15 +138,17 @@ export default function RandomProblemPage() {
               whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
               disabled={updating}
-              className="px-6 py-3 rounded-2xl font-medium text-white bg-[#3A506B] shadow-md hover:shadow-lg hover:bg-[#2c3c52] transition disabled:opacity-50"
+              className="btn-secondary disabled:opacity-50"
+              style={{ fontFamily: 'Oxanium, sans-serif' }}
             >
               ❌ Skip
             </motion.button>
           </div>
 
-          {/* Soft floating accents */}
-          <div className="absolute -top-20 -left-20 w-40 h-40 bg-[#5BC0BE] opacity-30 blur-3xl rounded-full animate-pulse" />
-          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-[#FF6B6B] opacity-30 blur-3xl rounded-full animate-pulse" />
+          {/* Status footer */}
+          <div className="mt-6 text-[#6e7681] text-xs text-center" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            Problem ID: {problem.cses_id} • Status: Ready • Awaiting Input
+          </div>
         </motion.div>
       </div>
     </>

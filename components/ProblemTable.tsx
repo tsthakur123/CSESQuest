@@ -15,62 +15,78 @@ interface ProblemTableProps {
 export default function ProblemTable({ problems, onUpdate }: ProblemTableProps) {
   return (
     <div className="overflow-x-auto mt-6">
-      <table className="min-w-full border border-gray-200 rounded-lg shadow-sm">
-        <thead className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
-          <tr>
-            <th className="px-4 py-2 text-left">ID</th>
-            <th className="px-4 py-2 text-left">Title</th>
-            <th className="px-4 py-2 text-left">Status</th>
-            <th className="px-4 py-2 text-left">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {problems.map((p, idx) => (
-            <tr
-              key={p.cses_id}
-              className={`${idx % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-purple-50 transition`}
-            >
-              <td className="px-4 py-2 font-medium text-gray-700">{p.cses_id}</td>
-              <td className="px-4 py-2">
-                <a
-                  href={p.link}
-                  target="_blank"
-                  className="text-purple-600 hover:underline font-semibold"
-                >
-                  {p.title}
-                </a>
-              </td>
-              <td className="px-4 py-2">
-                <span
-                  className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    p.status === "done"
-                      ? "bg-green-100 text-green-800"
-                      : p.status === "pending"
-                      ? "bg-yellow-100 text-yellow-800"
-                      : "bg-gray-100 text-gray-600"
-                  }`}
-                >
-                  {p.status.replace("_", " ")}
-                </span>
-              </td>
-              <td className="px-4 py-2 space-x-2">
-                <button
-                  className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition"
-                  onClick={() => onUpdate(p.cses_id, "done")}
-                >
-                  Done
-                </button>
-                <button
-                  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
-                  onClick={() => onUpdate(p.cses_id, "pending")}
-                >
-                  Pending
-                </button>
-              </td>
+      <div className="terminal-header mb-4">
+        <div className="terminal-dot red"></div>
+        <div className="terminal-dot yellow"></div>
+        <div className="terminal-dot green"></div>
+        <span className="text-[#8b949e] text-sm ml-2" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+          Problem Database
+        </span>
+      </div>
+      
+      <div className="card">
+        <table className="table-clean">
+          <thead>
+            <tr>
+              <th style={{ fontFamily: 'Oxanium, sans-serif' }}>ID</th>
+              <th style={{ fontFamily: 'Oxanium, sans-serif' }}>Title</th>
+              <th style={{ fontFamily: 'Oxanium, sans-serif' }}>Status</th>
+              <th style={{ fontFamily: 'Oxanium, sans-serif' }}>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {problems.map((p, idx) => (
+              <tr key={p.cses_id}>
+                <td className="font-medium text-[#f0f6fc] mono">{p.cses_id}</td>
+                <td>
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    className="text-[#58a6ff] hover:text-[#4c9eff] font-medium transition-colors"
+                    style={{ fontFamily: 'Oxanium, sans-serif' }}
+                  >
+                    {p.title}
+                  </a>
+                </td>
+                <td>
+                  <span
+                    className={`${
+                      p.status === "done"
+                        ? "status-done"
+                        : p.status === "pending"
+                        ? "status-pending"
+                        : "status-not-attempted"
+                    }`}
+                    style={{ fontFamily: 'Oxanium, sans-serif' }}
+                  >
+                    {p.status.replace("_", " ")}
+                  </span>
+                </td>
+                <td className="space-x-2">
+                  <button
+                    className="btn-primary text-sm"
+                    onClick={() => onUpdate(p.cses_id, "done")}
+                    style={{ fontFamily: 'Oxanium, sans-serif' }}
+                  >
+                    Done
+                  </button>
+                  <button
+                    className="btn-secondary text-sm text-[#f78166] border-[#f78166] hover:bg-[#f78166] hover:text-[#f0f6fc]"
+                    onClick={() => onUpdate(p.cses_id, "pending")}
+                    style={{ fontFamily: 'Oxanium, sans-serif' }}
+                  >
+                    Pending
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
+      <div className="text-[#6e7681] text-xs text-center mt-4" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+        Total Problems: {problems.length} • Ready for execution
+      </div>
     </div>
   );
 }

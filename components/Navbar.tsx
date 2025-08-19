@@ -18,40 +18,44 @@ export default function Navbar({ username }: NavbarProps) {
   };
 
   return (
-    <nav className="fixed w-full z-50 backdrop-blur-md bg-white/30 shadow-lg">
+    <nav className="fixed w-full z-50 bg-[#161b22]/95 backdrop-blur-md border-b border-[#30363d]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-500 hover:scale-105 transform transition"
+            className="text-2xl font-bold text-[#58a6ff] hover:text-[#4c9eff] transition-colors"
+            style={{ fontFamily: 'Oxanium, sans-serif' }}
           >
             CSESQuest
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex space-x-6 items-center">
             <Link
               href="/random-problem"
-              className="text-gray-800 font-medium hover:text-indigo-600 transition duration-300"
+              className="text-[#8b949e] hover:text-[#f0f6fc] transition-colors font-medium"
+              style={{ fontFamily: 'Oxanium, sans-serif' }}
             >
               Random Problem
             </Link>
             <Link
               href="/progress"
-              className="text-gray-800 font-medium hover:text-indigo-600 transition duration-300"
+              className="text-[#8b949e] hover:text-[#f0f6fc] transition-colors font-medium"
+              style={{ fontFamily: 'Oxanium, sans-serif' }}
             >
               Progress
             </Link>
 
             {username ? (
               <>
-                <span className="font-semibold text-indigo-600">
+                <span className="font-semibold text-[#3fb950]" style={{ fontFamily: 'Oxanium, sans-serif' }}>
                   {username}
                 </span>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 rounded-full border border-red-500 text-red-500 font-semibold hover:bg-red-500 hover:text-white transition"
+                  className="btn-secondary text-[#f78166] border-[#f78166] hover:bg-[#f78166] hover:text-[#f0f6fc]"
+                  style={{ fontFamily: 'Oxanium, sans-serif' }}
                 >
                   Logout
                 </button>
@@ -60,13 +64,15 @@ export default function Navbar({ username }: NavbarProps) {
               <>
                 <Link
                   href="/login"
-                  className="px-5 py-2 rounded-full border border-indigo-500 text-indigo-500 font-semibold hover:bg-indigo-500 hover:text-white transition"
+                  className="btn-secondary"
+                  style={{ fontFamily: 'Oxanium, sans-serif' }}
                 >
                   Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="px-5 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-pink-400 text-purple-900 font-semibold hover:scale-105 transform transition"
+                  className="btn-primary"
+                  style={{ fontFamily: 'Oxanium, sans-serif' }}
                 >
                   Signup
                 </Link>
@@ -78,7 +84,7 @@ export default function Navbar({ username }: NavbarProps) {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-800 focus:outline-none hover:text-indigo-600 transition"
+              className="text-[#8b949e] focus:outline-none hover:text-[#f0f6fc] transition-colors p-2"
             >
               {isOpen ? (
                 <HiX className="h-6 w-6" />
@@ -92,42 +98,47 @@ export default function Navbar({ username }: NavbarProps) {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white/90 backdrop-blur-md shadow-lg py-4 space-y-3 px-6">
+        <div className="md:hidden bg-[#161b22]/95 backdrop-blur-md border-b border-[#30363d] py-4 space-y-3 px-6">
           <Link
             href="/random-problem"
-            className="block text-gray-800 font-medium hover:text-indigo-600 transition duration-300"
+            className="block text-[#8b949e] hover:text-[#f0f6fc] transition-colors font-medium"
+            style={{ fontFamily: 'Oxanium, sans-serif' }}
           >
             Random Problem
           </Link>
           <Link
             href="/progress"
-            className="block text-gray-800 font-medium hover:text-indigo-600 transition duration-300"
+            className="block text-[#8b949e] hover:text-[#f0f6fc] transition-colors font-medium"
+            style={{ fontFamily: 'Oxanium, sans-serif' }}
           >
             Progress
           </Link>
           {username ? (
             <>
-              <span className="block font-semibold text-indigo-600">
+              <span className="block font-semibold text-[#3fb950]" style={{ fontFamily: 'Oxanium, sans-serif' }}>
                 {username}
               </span>
-              <Link
-                href="/logout"
-                className="block px-4 py-2 rounded-full border border-red-500 text-red-500 font-semibold hover:bg-red-500 hover:text-white transition"
+              <button
+                onClick={handleLogout}
+                className="block btn-secondary text-[#f78166] border-[#f78166] hover:bg-[#f78166] hover:text-[#f0f6fc]"
+                style={{ fontFamily: 'Oxanium, sans-serif' }}
               >
                 Logout
-              </Link>
+              </button>
             </>
           ) : (
             <>
               <Link
                 href="/login"
-                className="block px-4 py-2 rounded-full border border-indigo-500 text-indigo-500 font-semibold hover:bg-indigo-500 hover:text-white transition"
+                className="block btn-secondary"
+                style={{ fontFamily: 'Oxanium, sans-serif' }}
               >
                 Login
               </Link>
               <Link
                 href="/signup"
-                className="block px-4 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-pink-400 text-purple-900 font-semibold hover:scale-105 transform transition"
+                className="block btn-primary"
+                style={{ fontFamily: 'Oxanium, sans-serif' }}
               >
                 Signup
               </Link>

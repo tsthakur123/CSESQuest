@@ -61,8 +61,15 @@ export default function Home() {
 
   if (!problem)
     return (
-      <div className="flex items-center justify-center min-h-screen text-gray-500 font-semibold">
-        Loading...
+      <div className="flex items-center justify-center min-h-screen text-[#8b949e]">
+        <div className="text-center">
+          <div className="text-2xl mb-4 loading-dots" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            Loading
+          </div>
+          <div className="text-[#6e7681] text-sm" style={{ fontFamily: 'Oxanium, sans-serif' }}>
+            Initializing CSESQuest
+          </div>
+        </div>
       </div>
     );
 
@@ -90,7 +97,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-100 to-indigo-50">
+    <div className="min-h-screen bg-[#0d1117]">
       <Navbar username={username || undefined} />
       <Dashboard userEmail={username || undefined} />
       <main className="max-w-4xl mx-auto pt-2">
