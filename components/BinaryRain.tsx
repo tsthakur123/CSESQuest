@@ -34,6 +34,7 @@ export default function BinaryRain() {
     const binary = '01';
 
     function draw() {
+      if (!ctx || !canvas) return;
       // Semi-transparent background to create fade effect
       ctx.fillStyle = 'rgba(13, 17, 23, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
